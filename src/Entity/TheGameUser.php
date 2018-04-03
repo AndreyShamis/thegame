@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="thegame_users", uniqueConstraints={@ORM\UniqueConstraint(name="user_uniq_name", columns={"username"})})
  * @UniqueEntity("username", message="This User Name already exist")
  */
-class TheGameUser
+class TheGameUser implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()

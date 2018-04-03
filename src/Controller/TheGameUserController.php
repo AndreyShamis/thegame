@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\TheGameUser;
+use App\Form\TheGameUserType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
