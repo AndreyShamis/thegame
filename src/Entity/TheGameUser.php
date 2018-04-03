@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @property string salt
  * @ORM\Entity(repositoryClass="App\Repository\TheGameUserRepository")
  * @ORM\Table(name="thegame_users", uniqueConstraints={@ORM\UniqueConstraint(name="user_uniq_name", columns={"username"})})
  * @UniqueEntity("username", message="This User Name already exist")
