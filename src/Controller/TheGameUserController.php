@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\TheGameUser;
+use App\Form\TheGameUserType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,8 +96,7 @@ class TheGameUserController extends Controller
                             return new RedirectResponse($url);
                         }
 
-                        return $this->render('lbook/default/index.html.twig', array(
-                        ));
+                        return $this->redirectToRoute('home_index');
                     }
 
                     throw new AuthenticationException('Username or Password not valid.');
