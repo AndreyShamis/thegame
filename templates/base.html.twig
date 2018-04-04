@@ -10,41 +10,11 @@
     </head>
     <body>
         <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-            <header class="masthead mb-auto">
-                <div class="inner">
-                    <h3 class="masthead-brand">
-                        <span class="user-info">
-                            <small>Welcome,</small>{{ app.user.username| default('Guest') }}
-                        </span>
-
-                    </h3>
-                    <nav class="nav nav-masthead justify-content-center">
-                        <a class="nav-link active" href="#">Home</a>
-                        <a class="nav-link" href="#">Features</a>
-
-                        {% if app.user is not null %}
-                            <a class="nav-link" href="#">
-                                Settings
-                            </a>
-                            {#<a class="nav-link" href="{{path('user_show', { 'id': app.user.id })}}">#}
-                                {#<i class="ace-icon fa fa-user"></i>#}
-                                {#Profile#}
-                            {#</a>#}
-                            <a class="nav-link" href="{{ path('logout') }}" target="">
-                                Logout
-                            </a>
-                        {% else %}
-                            <a class="nav-link"  href="{{ path('login') }}" target="">
-                                Login
-                            </a>
-                        {% endif %}
-                    </nav>
-                </div>
-            </header>
+            {% include 'menu.top.html.twig' %}
             <main role="main" class="inner cover">
             {% block body %}{% endblock %}
             </main>
-            {% block javascripts %}{% endblock %}
+
         {% include 'base.footer.html.twig' %}
         </div><!-- /.main-container -->
 
@@ -58,4 +28,5 @@
             {% endblock documentReady %}
         });
     </script>
+    {% block javascripts %}{% endblock %}
 </html>

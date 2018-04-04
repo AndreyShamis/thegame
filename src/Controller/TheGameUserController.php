@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\TheGameUser;
 use App\Form\TheGameUserType;
+use App\Repository\TheGameUserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +25,13 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class TheGameUserController extends Controller
 {
     /**
-     * @Route("/", name="the_game_user")
+     * @Route("/", name="user_index")
+     * @param TheGameUserRepository $userRepository
+     * @return Response
      */
-    public function index()
+    public function index(TheGameUserRepository $userRepository)
     {
+        return $this->render('the_game_user/index.html.twig', ['users' => $userRepository->findAll()]);
         return $this->render('the_game_user/index.html.twig', [
             'controller_name' => 'TheGameUserController',
         ]);
@@ -154,6 +159,24 @@ class TheGameUserController extends Controller
             'the_game_user/register.html.twig',
             array('form' => $form->createView())
         );
+    }
+
+    /**
+     * Finds and displays a Users  entity.
+     *
+     * @Route("/{id}", name="user_show")
+     * @Method("GET")
+     * @param TheGameUser $obj
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function showAction(TheGameUser $obj): Response
+    {
+        // check for "edit" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $obj);
+        return $this->render('the_game_user/show.html.twig', array(
+            'user' => $obj,
+        ));
     }
 
     /**

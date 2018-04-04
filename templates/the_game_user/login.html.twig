@@ -226,6 +226,7 @@
 
 
     <!-- inline scripts related to this page -->
+    {% block javascripts %}
     <script type="text/javascript">
         jQuery(function($) {
             $(document).on('click', '.toolbar a[data-target]', function(e) {
@@ -283,6 +284,7 @@
             // });
         });
     </script>
+    {% endblock %}
 
 
 {% endblock %}
