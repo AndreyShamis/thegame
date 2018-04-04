@@ -155,4 +155,13 @@ class TheGameUserController extends Controller
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * @Route("/logout", name="logout")
+     * @param Request $request
+     */
+    public function logout(Request $request): void
+    {
+
+    }
 }

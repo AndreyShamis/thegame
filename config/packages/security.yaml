@@ -22,7 +22,7 @@ security:
             #http_basic: ~
             anonymous: ~
             logout:
-                path:                 /logout
+                path:                 /user/logout
                 target:               /
                 success_handler:      ~
                 invalidate_session:   true

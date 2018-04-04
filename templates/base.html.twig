@@ -6,11 +6,57 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Custom styles for this template -->
+        <link href="/css/css.css" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">
+                        <span class="user-info">
+                            <small>Welcome,</small>{{ app.user.username| default('Guest') }}
+                        </span>
+
+                    </h3>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="#">Features</a>
+
+                        {% if app.user is not null %}
+                            <a class="nav-link" href="#">
+                                Settings
+                            </a>
+                            {#<a class="nav-link" href="{{path('user_show', { 'id': app.user.id })}}">#}
+                                {#<i class="ace-icon fa fa-user"></i>#}
+                                {#Profile#}
+                            {#</a>#}
+                            <a class="nav-link" href="{{ path('logout') }}" target="">
+                                Logout
+                            </a>
+                        {% else %}
+                            <a class="nav-link"  href="{{ path('login') }}" target="">
+                                Login
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </header>
+            <main role="main" class="inner cover">
+            {% block body %}{% endblock %}
+            </main>
+            {% block javascripts %}{% endblock %}
+        {% include 'base.footer.html.twig' %}
+        </div><!-- /.main-container -->
+
     </body>
+
+    <script>
+        $(document).ready(function () {
+            {% block documentReady %}
+            {% endblock documentReady %}
+        });
+    </script>
 </html>
